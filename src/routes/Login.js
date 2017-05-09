@@ -68,13 +68,33 @@ class Login extends Component {
                                     value={this.state.password} />
                             </View>
 
-                            <TouchableOpacity onPress={this.onLogin}>
+                            <TouchableOpacity onPress={this.onLogin} activeOpacity={0.8}>
                                 <View style={styles.button}>
                                     <Text style={{ color: '#fff', fontSize: 18 }}>登录</Text>
                                 </View>
                             </TouchableOpacity>
+                            <Text style={styles.code}>验证码登录</Text>
                         </View>
 
+
+                    </View>
+                    <View style={styles.otherLoginContainer}>
+                        <View style={styles.others}>
+                            <View style={styles.othersLine}>
+                                <Text style={{ fontSize: 16, textAlign: 'center', color: '#a9b2ba' }}>第三方登录</Text>
+                            </View>
+                            <View style={styles.apps}>
+                                <TouchableOpacity onPress={this.onLogin} activeOpacity={0.8}>
+                                    <Image style={styles.appIcon} source={require('../images/login/login_icon3.png')} />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={this.onLogin} activeOpacity={0.8}>
+                                    <Image style={styles.appIcon} source={require('../images/login/login_icon4.png')} />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={this.onLogin} activeOpacity={0.8}>
+                                    <Image style={styles.appIcon} source={require('../images/login/login_icon5.png')} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
 
                     </View>
                 </Image>
@@ -125,7 +145,7 @@ const styles = StyleSheet.create({
         width: 46,
     },
     input: {
-        color: '#fff',
+        color: '#3d4961',
         flex: 1,
     },
     button: {
@@ -135,6 +155,32 @@ const styles = StyleSheet.create({
         borderRadius: 23,
         height: 45,
         backgroundColor: '#24b0d8'
+    },
+    code: {
+        marginTop: 16,
+        color: '#24b0d8',
+        textAlign: 'center'
+    },
+    otherLoginContainer: {
+        flex: 1,
+    },
+    others: {
+        flex: 1,
+        marginLeft: 13,
+        marginRight: 13
+    },
+    appIcon:{
+        width:47,
+        height:47
+    },
+    othersLine:{
+        flex:1,
+    },
+    apps:{
+        flex:3,
+        flexDirection:'row',
+        justifyContent:'space-around',
+        alignItems:'center',
     }
 
 })
