@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, TextInput, Image, StyleSheet, Dimensions, StatusBar } from 'react-native'
 const { height, width } = Dimensions.get('window');
-class Login extends Component {
+class LoginForCode extends Component {
     constructor() {
         super();
         this.state = {
@@ -70,17 +70,22 @@ class Login extends Component {
                             <View style={styles.inputContainer}>
                                 <Image
                                     style={styles.icon}
-                                    source={require('../images/login/login_input_icon2.png')}
+                                    source={require('../images/login/login_input_icon3.png')}
                                 />
                                 <TextInput
                                     style={styles.input}
                                     secureTextEntry={true}
-                                    placeholder="  密码"
+                                    placeholder="  输入验证码"
                                     selectionColor="#24afd7"
                                     placeholderTextColor="#51616f"
                                     underlineColorAndroid="transparent"
                                     onChangeText={this.onChange('password')}
                                     value={this.state.password} />
+                                <TouchableOpacity activeOpacity={0.8}>
+                                    <View style={styles.getCode}>
+                                        <Text style={{ color: '#fff', fontSize: 14 }}>获取验证码</Text>
+                                    </View>
+                                </TouchableOpacity>
                             </View>
 
                             <TouchableOpacity onPress={this.onLogin} activeOpacity={0.8}>
@@ -88,8 +93,8 @@ class Login extends Component {
                                     <Text style={{ color: '#fff', fontSize: 18 }}>登录</Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={this.navToUrl('LoginForCode')} activeOpacity={0.8}>
-                                <Text style={styles.code}>验证码登录</Text>
+                            <TouchableOpacity onPress={()=>this.props.navigation.goBack()} activeOpacity={0.8}>
+                                <Text style={styles.code}>密码登录</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -214,7 +219,15 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    getCode: {
+        width: 120,
+        height: 38,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 19,
+        backgroundColor: '#24b0d8'
     }
 
 })
-export default Login;
+export default LoginForCode;

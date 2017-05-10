@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, TextInput, Image, StyleSheet, Dimensions, StatusBar } from 'react-native'
 const { height, width } = Dimensions.get('window');
-class Login extends Component {
+class Reg extends Component {
     constructor() {
         super();
         this.state = {
@@ -37,10 +37,10 @@ class Login extends Component {
                 >
                     <View style={styles.navBar}>
                         <View style={styles.flex1}></View>
-                        <View style={styles.flex1}><Text style={{ color: '#fff', fontSize: 20 }}>登录</Text></View>
+                        <View style={styles.flex1}><Text style={{ color: '#fff', fontSize: 20 }}>注册</Text></View>
                         <View style={[styles.flex1, { alignItems: 'flex-end' }]}>
-                            <TouchableOpacity onPress={this.navToUrl('Reg')}>
-                                <Text style={{ color: '#fff', fontSize: 16, marginRight: 11 }}>注册</Text>
+                            <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>
+                                <Text style={{ color: '#fff', fontSize: 16, marginRight: 11 }}>登录</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -60,7 +60,7 @@ class Login extends Component {
                                 <TextInput
                                     style={styles.input}
                                     keyboardType={"numeric"}
-                                    placeholder="  用户名"
+                                    placeholder="  手机号"
                                     selectionColor="#24afd7"
                                     placeholderTextColor="#51616f"
                                     underlineColorAndroid="transparent"
@@ -70,52 +70,63 @@ class Login extends Component {
                             <View style={styles.inputContainer}>
                                 <Image
                                     style={styles.icon}
+                                    source={require('../images/login/login_input_icon3.png')}
+                                />
+                                <TextInput
+                                    style={styles.input}
+                                    secureTextEntry={true}
+                                    placeholder="  验证码"
+                                    selectionColor="#24afd7"
+                                    placeholderTextColor="#51616f"
+                                    underlineColorAndroid="transparent"
+                                    onChangeText={this.onChange('password')}
+                                    value={this.state.password} />
+                                <TouchableOpacity activeOpacity={0.8}>
+                                    <View style={styles.getCode}>
+                                        <Text style={{ color: '#fff', fontSize: 14 }}>获取验证码</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.inputContainer}>
+                                <Image
+                                    style={styles.icon}
                                     source={require('../images/login/login_input_icon2.png')}
                                 />
                                 <TextInput
                                     style={styles.input}
                                     secureTextEntry={true}
-                                    placeholder="  密码"
+                                    placeholder="  输入密码"
                                     selectionColor="#24afd7"
                                     placeholderTextColor="#51616f"
                                     underlineColorAndroid="transparent"
                                     onChangeText={this.onChange('password')}
                                     value={this.state.password} />
                             </View>
-
+                            <View style={styles.inputContainer}>
+                                <Image
+                                    style={styles.icon}
+                                    source={require('../images/login/login_input_icon2.png')}
+                                />
+                                <TextInput
+                                    style={styles.input}
+                                    secureTextEntry={true}
+                                    placeholder="  确认密码"
+                                    selectionColor="#24afd7"
+                                    placeholderTextColor="#51616f"
+                                    underlineColorAndroid="transparent"
+                                    onChangeText={this.onChange('password')}
+                                    value={this.state.password} />
+                            </View>
                             <TouchableOpacity onPress={this.onLogin} activeOpacity={0.8}>
                                 <View style={styles.button}>
-                                    <Text style={{ color: '#fff', fontSize: 18 }}>登录</Text>
+                                    <Text style={{ color: '#fff', fontSize: 18 }}>提交</Text>
                                 </View>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={this.navToUrl('LoginForCode')} activeOpacity={0.8}>
-                                <Text style={styles.code}>验证码登录</Text>
-                            </TouchableOpacity>
                         </View>
 
 
                     </View>
-                    <View style={styles.otherLoginContainer}>
-                        <View style={styles.others}>
-                            <View style={styles.othersLine}>
-                                <View style={styles.line}></View>
-                                <Text style={{ fontSize: 16, textAlign: 'center', color: '#a9b2ba', flex: 2 }}>第三方登录</Text>
-                                <View style={styles.line}></View>
-                            </View>
-                            <View style={styles.apps}>
-                                <TouchableOpacity onPress={this.onLogin} activeOpacity={0.8}>
-                                    <Image style={styles.appIcon} source={require('../images/login/login_icon3.png')} />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={this.onLogin} activeOpacity={0.8}>
-                                    <Image style={styles.appIcon} source={require('../images/login/login_icon4.png')} />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={this.onLogin} activeOpacity={0.8}>
-                                    <Image style={styles.appIcon} source={require('../images/login/login_icon5.png')} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
 
-                    </View>
                 </Image>
             </View>
 
@@ -176,35 +187,6 @@ const styles = StyleSheet.create({
         color: '#24b0d8',
         textAlign: 'center'
     },
-    otherLoginContainer: {
-        flex: 1,
-    },
-    others: {
-        flex: 1,
-        marginLeft: 38,
-        marginRight: 38,
-    },
-    appIcon: {
-        width: 47,
-        height: 47
-    },
-    othersLine: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    line: {
-        height: 1,
-        backgroundColor: '#a9b2ba',
-        flex: 1
-    },
-    apps: {
-        flex: 3,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-    },
     navBar: {
         flexDirection: 'row',
         marginTop: 10
@@ -214,7 +196,14 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    getCode: {
+        width: 120,
+        height: 38,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 19,
+        backgroundColor: '#24b0d8'
     }
-
 })
-export default Login;
+export default Reg;
